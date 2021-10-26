@@ -33,7 +33,7 @@ variable "kubernetes_version" {
 }
 
 #############
-# K8S CONFIG
+# KMS CONFIG
 #############
 variable "kms_alias_name" {
   default = "sops_kms_key"
