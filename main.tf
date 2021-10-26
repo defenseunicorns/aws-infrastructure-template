@@ -3,10 +3,10 @@
 ###################
 terraform {
   backend "s3" {
-    bucket         = "hypergiant-aws-tf-state"
-    key            = "leapfrog-test/terraform.tfstate"
-    region         = "us-east-2"
-    dynamodb_table = "lf-hg-tf-states-lock"
+    bucket         = var.terraform_state_s3_bucket
+    key            = var.terraform_state_s3_key
+    region         = var.aws_region
+    dynamodb_table = var.terraform_state_s3_dynamodb_table
   }
 
   required_providers {

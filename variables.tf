@@ -2,15 +2,15 @@
 # Terraform / AWS CONFIG
 ##################
 variable "terraform_state_s3_bucket" {
-  default = ""
+  default = "infra-aws-tf-state"
 }
 
 variable "terraform_state_s3_key" {
-  default = ""
+  default = "infra/terraform.tfstate"
 }
 
 variable "terraform_state_s3_dynamodb_table" {
-  default = ""
+  default = "infra-tf-states-lock"
 }
 
 variable "aws_profile" {
