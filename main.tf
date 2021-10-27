@@ -3,10 +3,10 @@
 ###################
 terraform {
   backend "s3" {
-    bucket         = var.terraform_state_s3_bucket
-    key            = var.terraform_state_s3_key
-    region         = var.aws_region
-    dynamodb_table = var.terraform_state_s3_dynamodb_table
+    bucket         = "infra-aws-tf-state"
+    key            = "infra/terraform.tfstate"
+    region         = "us-west-2"
+    dynamodb_table = "bb-infra-terraform-state-lock"
   }
 
   required_providers {
@@ -68,25 +68,12 @@ resource "aws_kms_key" "kms_sops" {
 
 resource "aws_kms_alias" "kms_alias" {
   name          = var.kms_alias_name
-  target_key_id = aws_kms_key.default.id
+  target_key_id = aws_kms_key.kms_sops.id
 }
 
 resource "aws_kms_grant" "kms_permissions" {
   name              = "kms-grant-sops"
   key_id            = aws_kms_key.kms_sops.key_id
-  grantee_principal = module.eks_cluster.eks.eks_node_group_role.arn
+  grantee_principal = module.eks_cluster.eks.cluster_iam_role_arn
   operations        = ["Encrypt", "Decrypt", "GenerateDataKey"]
-}
-
-######################
-# Deploy Private Zone
-######################
-resource "aws_route53_zone" "private" {
-  name = var.private_dns_zone_name
-
-  vpc {
-    vpc_id = module.eks_cluster.vpc_id
-  }
-
-  comment = var.cluster_name
 }

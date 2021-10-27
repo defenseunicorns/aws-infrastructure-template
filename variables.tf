@@ -1,18 +1,6 @@
 ##################
-# Terraform / AWS CONFIG
+# AWS CONFIG
 ##################
-variable "terraform_state_s3_bucket" {
-  default = "infra-aws-tf-state"
-}
-
-variable "terraform_state_s3_key" {
-  default = "infra/terraform.tfstate"
-}
-
-variable "terraform_state_s3_dynamodb_table" {
-  default = "infra-tf-states-lock"
-}
-
 variable "aws_profile" {
   default = ""
 }
@@ -36,12 +24,10 @@ variable "kubernetes_version" {
 # KMS CONFIG
 #############
 variable "kms_alias_name" {
-  default = "sops_kms_key"
+  default = "alias/sops_kms_key"
 }
 
 #############
 # EKS
 #############
-variable "user_map" {
-  default = []
-}
+variable "user_map" {}
