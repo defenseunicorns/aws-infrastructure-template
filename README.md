@@ -4,7 +4,7 @@ This template can be used to set up an AWS eks cluster using terraform
 Before running terraform you must manually create the s3 bucket and dynamodb table where the terraform state is going to be stored. For the dynamodb partition key use LockID (String) - see instructions below.
 
 
-How to use this repo template:
+How to use this template repo:
 
 
 1. Log into the AWS Console and create an S3 bucket.
