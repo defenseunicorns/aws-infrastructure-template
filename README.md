@@ -26,3 +26,4 @@ user_map = [
 
 9. Run `terraform init`, `terraform plan`, `terraform apply`.
 
+10. A kubeconfig file will be included at the root of this directory. Use this kubeconfig file to connect to the cluster.
